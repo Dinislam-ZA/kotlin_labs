@@ -11,14 +11,15 @@ fun main(args: Array<String>) {
 
     val inputFile = args[0]
     val outputFile = args[1]
-    val wordsToCount = args[2].split(",").map { it.trim().toLowerCase() }.toSet()
+    val wordsToCount = args[2].split(",").map { it.trim().lowercase() }.toSet()
+    println(wordsToCount)
 
     val wordCounts = mutableMapOf<String, Int>()
 
     try {
         File(inputFile).useLines { lines ->
             lines.forEach { line ->
-                line.toLowerCase().split("\\s+".toRegex()).forEach { word ->
+                line.lowercase().split("[^\\p{L}]+".toRegex()).forEach { word ->
                     if (word in wordsToCount) {
                         wordCounts[word] = wordCounts.getOrDefault(word, 0) + 1
                     }
@@ -26,6 +27,7 @@ fun main(args: Array<String>) {
             }
         }
 
+        println(wordCounts)
         val sortedWords = wordCounts.toList().sortedBy { (_, value) -> value }.toMap()
 
         File(outputFile).printWriter().use { out ->
