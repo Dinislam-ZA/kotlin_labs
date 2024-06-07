@@ -54,5 +54,4 @@ fun main(){
     println("Вычитание дробей: ${fractionFirst + fractionSecond}")
     println("Умножение дробей: ${fractionFirst + fractionSecond}")
     println("Деление дробей: ${fractionFirst + fractionSecond}")
-
 }
